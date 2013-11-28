@@ -3,7 +3,7 @@
         <name>Elggx Badges</name>
         <id>elggx_badges</id>
         <author>iionly (for Elgg 1.9) / Billy Gunn</author>
-        <version>1.9.9</version>
+        <version>1.9.10</version>
         <category>enhancement</category>
         <description>This plugin allows users to be awarded a badge based on a configurable number of userpoints.</description>
         <website>https://github.com/iionly</website>
