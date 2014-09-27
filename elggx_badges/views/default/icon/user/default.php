@@ -17,12 +17,13 @@
 
 $user = elgg_extract('entity', $vars, elgg_get_logged_in_user_entity());
 $size = elgg_extract('size', $vars, 'medium');
-if (!in_array($size, array('topbar', 'tiny', 'small', 'medium', 'large', 'master'))) {
+$icon_sizes = elgg_get_config('icon_sizes');
+if (!array_key_exists($size, $icon_sizes)) {
 	$size = 'medium';
 }
 
 if (!($user instanceof ElggUser)) {
-        return;
+	return;
 }
 
 $name = htmlspecialchars($user->name, ENT_QUOTES, 'UTF-8', false);
@@ -33,9 +34,9 @@ if (isset($vars['class'])) {
 	$class = "$class {$vars['class']}";
 }
 if ($user->isBanned()) {
-        $class .= ' elgg-state-banned';
-        $banned_text = elgg_echo('banned');
-        $name .= " ($banned_text)";
+	$class .= ' elgg-state-banned';
+	$banned_text = elgg_echo('banned');
+	$name .= " ($banned_text)";
 }
 
 $use_link = elgg_extract('use_link', $vars, true);
@@ -66,16 +67,15 @@ if (isset($vars['hover'])) {
 }
 
 $icon = elgg_view('output/img', array(
-        'src' => $user->getIconURL($size),
-        'alt' => $name,
-        'title' => $name,
-        'class' => $img_class,
+	'src' => $user->getIconURL($size),
+	'alt' => $name,
+	'title' => $name,
+	'class' => $img_class,
 ));
 
 $show_menu = $use_hover && (elgg_is_admin_logged_in() || !$user->isBanned());
 
 ?>
-
 <div class="<?php echo $class; ?>">
 <td>
 <?php
@@ -106,43 +106,39 @@ if ($use_link) {
 // Overlay of Badge on upper left corner of avatar
 if ($vars['entity']->badges_badge && (int)elgg_get_plugin_setting('avatar_overlay', 'elggx_badges')) {
 
-    switch($size) {
-            case "small":
-            case "medium":
-            case "large":
-                // set security token
-                $ts = time ();
-                $token = generate_action_token ( $ts );
-                $tokenRequest = "&__elgg_token=$token&__elgg_ts=$ts";
-                $badge_url = elgg_get_site_url() . 'action/badges/view?' . $tokenRequest . '&file_guid=' . $vars['entity']->badges_badge;
-                $badge_style = "width: 16px;
-                height: 16px;
-                display: block;
-                position: absolute;
-                top: 0px;
-                left: 0px;
-                border: 1px solid #CCC;
-                -webkit-border-radius: 3px;
-                -moz-border-radius: 3px;
-                border-radius: 3px;
-                background: white;";
-                break;
-            default:
-                break;
-    }
+	switch($size) {
+		case "small":
+		case "medium":
+		case "large":
+			$badge_url = elgg_add_action_tokens_to_url(elgg_get_site_url() . 'action/badges/view?' . 'file_guid=' . $vars['entity']->badges_badge);
+			$badge_style = "width: 16px;
+				height: 16px;
+				display: block;
+				position: absolute;
+				top: 0px;
+				left: 0px;
+				border: 1px solid #CCC;
+				-webkit-border-radius: 3px;
+				-moz-border-radius: 3px;
+				border-radius: 3px;
+				background: white;";
+			break;
+		default:
+			break;
+	}
 
-    if ($guid = $vars['entity']->badges_badge) {
-        $badge = get_entity($guid);
-    }
+	if ($guid = $vars['entity']->badges_badge) {
+		$badge = get_entity($guid);
+	}
 
-    if ($badge_style) {
+	if ($badge_style) {
 ?>
-        <div style="<?php echo $badge_style; ?>">
-        <img title="<?php echo $badge->title; ?>" src="<?php echo $badge_url; ?>">
-        </div>
+		<div style="<?php echo $badge_style; ?>">
+		<img title="<?php echo $badge->title; ?>" src="<?php echo $badge_url; ?>">
+		</div>
 
 <?php
-    }
+	}
 }
 ?>
 </td>
