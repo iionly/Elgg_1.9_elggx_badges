@@ -36,7 +36,7 @@ foreach ($entities as $entity) {
 	$html .= "<td><img src=\"" . elgg_add_action_tokens_to_url(elgg_get_site_url() . 'action/badges/view?file_guid=' . $entity->guid) . "\"></td>";
 	$html .= "<td>";
 	$html .= "<a href=\"" . elgg_add_action_tokens_to_url(elgg_get_site_url() . 'admin/administer_utilities/elggx_badges?tab=edit&guid=' . $entity->guid) . "\">".elgg_echo('badges:edit')."</a> | ";
-	$html .= elgg_view("output/confirmlink", array(
+	$html .= elgg_view("output/url", array(
 		'href' => elgg_get_site_url() . "action/badges/delete?guid={$entity->guid}",
 		'text' => elgg_echo('badges:delete'),
 		'is_action' => true,

@@ -1,6 +1,6 @@
-Elggx Bagdes plugin for Elgg 1.9
-Latest Version: 1.9.11
-Released: 2014-09-25
+Elggx Bagdes plugin for Elgg 1.10
+Latest Version: 1.10.12
+Released: 2015-02-01
 Contact: iionly@gmx.de
 License: GNU General Public License version 2
 Copyright: (c) iionly (for Elgg 1.9 version), Billy Gunn
@@ -26,6 +26,12 @@ In case you have an earlier version of the Elggx Badges plugin installed it's be
 
 
 Changelog:
+
+1.10.12 (iionly):
+
+* Based on version 1.9.11,
+* Fix of deprecation issues occuring on Elgg 1.10 (namely changing output/confirmlink view to output/url view).
+
 
 1.9.11 (iionly):
 
