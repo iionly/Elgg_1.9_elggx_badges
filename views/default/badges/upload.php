@@ -20,7 +20,7 @@
 		<br /><br />
 
 		<label><?php echo elgg_echo("badges:access_id"); ?>:</label>
-		<?php echo elgg_view("input/dropdown",array(
+		<?php echo elgg_view("input/select",array(
 				'name' => 'access_id',
 				'options_values' => array(
 					'0'  => elgg_echo('PRIVATE'),
