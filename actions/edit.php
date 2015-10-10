@@ -32,7 +32,7 @@ if (get_input('url') != '') {
 	}
 }
 
-if (isset($_FILES['badge']['name'])) {
+if (isset($_FILES['badge']['name']) && !empty($_FILES['badge']['name'])) {
 	$filename = $_FILES['badge']['name'];
 	$mime = $_FILES['badge']['type'];
 	$prefix = 'image/badges/';
