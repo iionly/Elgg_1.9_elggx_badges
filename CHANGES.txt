@@ -1,6 +1,11 @@
 Changelog
 =========
 
+1.10.15
+-------
+
+- Fix: do not delete existing badge image when editing a badge without replacing the badge image.
+
 1.10.14
 -------
 
