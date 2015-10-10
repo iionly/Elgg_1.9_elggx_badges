@@ -1,6 +1,13 @@
 Changelog
 =========
 
+1.10.14
+-------
+
+- Editing a badge now has the option to replace the badge image,
+- composer.json edited,
+- Code cleanup.
+
 1.10.13
 -------
 

@@ -39,8 +39,6 @@ foreach ($entities as $entity) {
 	$html .= elgg_view("output/url", array(
 		'href' => elgg_get_site_url() . "action/badges/delete?guid={$entity->guid}",
 		'text' => elgg_echo('badges:delete'),
-		'is_action' => true,
-		'is_trusted' => true,
 		'confirm' => elgg_echo('badges:delete:confirm')
 	));
 	$html .= "</td></tr>";

@@ -1,11 +1,11 @@
-Elggx Bagdes plugin for Elgg 1.10 + 1.11
+Elggx Bagdes plugin for Elgg 1.10 - 1.12
 ========================================
 
-Latest Version: 1.10.13  
-Released: 2015-06-21  
+Latest Version: 1.10.14  
+Released: 2015-10-10  
 Contact: iionly@gmx.de  
 License: GNU General Public License version 2  
-Copyright: (c) iionly (for Elgg 1.9 version), Billy Gunn
+Copyright: (c) iionly (for Elgg 1.8 and newer), Billy Gunn
 
 
 Description
@@ -21,8 +21,7 @@ The badge will show below the profile picture on the user's profile pages. There
 Installation
 ------------
 
-In case you have an earlier version of the Elggx Badges plugin installed it's best to remove the folder completely before copying the new version to the server.
-
-1. Copy the elggx_badges folder into the mod directory of your Elgg installation,
-2. Enable the plugin in the admin section of your site,
-3. Configure then the plugin settings (section "Configure" - "Settings" - "Elggx Badges"). At last upload some Badges and enter the Badges details (section "Administer" - "Utilities" - "Elggx Badges").
+1. In case you have an earlier version of the Elggx Badges plugin installed it's best to remove the folder completely before copying the new version to the server,
+2. Copy the elggx_badges folder into the mod directory of your Elgg installation,
+3. Enable the plugin in the admin section of your site,
+4. Configure then the plugin settings (section "Configure" - "Settings" - "Elggx Badges"). At last upload some Badges and enter the Badges details (section "Administer" - "Utilities" - "Elggx Badges").

@@ -10,30 +10,29 @@ foreach ($entities as $entity) {
 	$options[$label] = $entity->guid;
 }
 
-?>
+$body = "<div class='mtl mbm'><label>" . elgg_echo("badges:username") . ":</label><br>";
+$body .= elgg_view("input/text", array('name' => 'username', 'value' => $user->username));
+$body .= "</div>";
 
-<br>
-<div id="badges_assign_form">
-	<form action="<?php echo elgg_add_action_tokens_to_url(elgg_get_site_url() . 'action/badges/assign'); ?>" method="post" enctype="multipart/form-data">
-	<p>
-		<label><?php echo elgg_echo("badges:username"); ?>:</label><br />
-		<?php echo elgg_view("input/text",array('name' => 'username', 'value' => $user->username)); ?>
-		<br /><br />
+$body .= "<div class='mbm'>";
+$body .= elgg_view('input/checkboxes', array(
+	'name' => 'locked',
+	'id' => 'locked',
+	'options' => array(elgg_echo('badges:lock') => 0)
+));
+$body .= elgg_view("output/longtext", array("value" => elgg_echo("badges:lock:info"), 'class' => 'elgg-subtext'));
+$body .= "</div>";
 
-		<?php echo elgg_view('input/checkboxes', array(
-				'name' => 'locked',
-				'id' => 'locked',
-				'options' => array(elgg_echo('badges:lock') => 0)
-			));
-		?>
-		<?php echo elgg_echo("badges:lock:info"); ?>
-		<br /><br />
+$body .= "<div class='mbl'><label>" . elgg_echo("badges:assign_list") . "</label><br>";
+$body .= elgg_view("input/radio", array('name' => 'badge', 'value' => $entity->guid,  'options' => $options));
+$body .= "</div>";
 
-		<label><?php echo elgg_echo("badges:assign_list"); ?></label><br />
-		<?php echo elgg_view("input/radio",array('name' => 'badge', 'value' => $entity->guid,  'options' => $options)); ?><br />
-		<br /><br />
+$body .= elgg_view('input/submit', array('value' => elgg_echo("badges:assign_badge")));
 
-		<br /><input type="submit" class="elgg-button-submit" value="<?php echo elgg_echo("badges:assign_badge"); ?>" />
-	</p>
-	</form>
-</div>
+$form_vars = array(
+	'enctype' => 'multipart/form-data',
+	'body' => $body);
+
+$form = elgg_view_form('badges/assign', $form_vars, $vars);
+
+echo $form;
