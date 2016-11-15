@@ -69,7 +69,6 @@ $show_menu = $use_hover && (elgg_is_admin_logged_in() || !$user->isBanned());
 
 ?>
 <div class="<?php echo $class; ?>">
-<td>
 <?php
 
 if ($show_menu) {
@@ -133,5 +132,4 @@ if ($vars['entity']->badges_badge && (int)elgg_get_plugin_setting('avatar_overla
 	}
 }
 ?>
-</td>
 </div>
