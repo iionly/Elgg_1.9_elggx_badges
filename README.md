@@ -1,7 +1,7 @@
-Elggx Bagdes plugin for Elgg 2.X
-================================
+Elggx Bagdes plugin for Elgg 2.2 and newer 2.X
+==============================================
 
-Latest Version: 2.0.2  
+Latest Version: 2.2.2  
 Released: 2016-12-11  
 Contact: iionly@gmx.de  
 License: GNU General Public License version 2  

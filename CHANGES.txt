@@ -1,6 +1,12 @@
 Changelog
 =========
 
+2.2.2
+-----
+
+- Updated user icon view to use elgg_get_icon_sizes() instead of elgg_get_config('icon_sizes') that was deprecated in Elgg 2.2,
+- Minimum Elgg version required is now Elgg 2.2.0.
+
 2.0.2
 -----
 
