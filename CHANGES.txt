@@ -1,6 +1,12 @@
 Changelog
 =========
 
+2.0.2
+-----
+
+- Fix: Removes unnecessary <td> tags from user icon view.
+- Minor cleanup of user icon view.
+
 2.0.1
 -----
 
