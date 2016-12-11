@@ -76,10 +76,7 @@ $icon = elgg_view('output/img', array(
 
 $show_menu = $use_hover && (elgg_is_admin_logged_in() || !$user->isBanned());
 
-?>
-<div class="<?php echo $class; ?>">
-<td>
-<?php
+echo '<div class="' . $class . '">';
 
 if ($show_menu) {
 	$params = array(
@@ -133,14 +130,11 @@ if ($vars['entity']->badges_badge && (int)elgg_get_plugin_setting('avatar_overla
 	}
 
 	if ($badge_style) {
-?>
-		<div style="<?php echo $badge_style; ?>">
-		<img title="<?php echo $badge->title; ?>" src="<?php echo $badge_url; ?>">
-		</div>
 
-<?php
+		echo '<div style="' . $badge_style . '">';
+		echo '<img title="' . $badge->title . '" src="' . $badge_url . '">';
+		echo '</div>';
 	}
 }
-?>
-</td>
-</div>
+
+echo '</div>';
