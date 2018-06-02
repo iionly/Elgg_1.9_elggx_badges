@@ -59,48 +59,52 @@ if (isset($vars['hover'])) {
 	$use_hover = $vars['hover'];
 }
 
-$icon = elgg_view('output/img', array(
+$icon = elgg_view('output/img', [
 	'src' => $user->getIconURL($size),
 	'alt' => $name,
 	'title' => $name,
 	'class' => $img_class,
-));
+]);
 
 $show_menu = $use_hover && (elgg_is_admin_logged_in() || !$user->isBanned());
 
 echo '<div class="' . $class . '">';
 
 if ($show_menu) {
-	$params = array(
+	$params = [
 		'entity' => $user,
 		'username' => $username,
 		'name' => $name,
-	);
+	];
 	echo elgg_view_icon('hover-menu');
-	echo elgg_view('navigation/menu/user_hover/placeholder', array('entity' => $user));
+	echo elgg_view('navigation/menu/user_hover/placeholder', ['entity' => $user]);
 }
 
 if ($use_link) {
 	$class = elgg_extract('link_class', $vars, '');
 	$url = elgg_extract('href', $vars, $user->getURL());
-	echo elgg_view('output/url', array(
+	echo elgg_view('output/url', [
 		'href' => $url,
 		'text' => $icon,
 		'is_trusted' => true,
 		'class' => $class,
-	));
+	]);
 } else {
 	echo "<a>$icon</a>";
 }
 
 // Overlay of Badge on upper left corner of avatar
-if ($vars['entity']->badges_badge && (int)elgg_get_plugin_setting('avatar_overlay', 'elggx_badges')) {
+if (($badge_guid = $vars['entity']->badges_badge) && ((int) elgg_get_plugin_setting('avatar_overlay', 'elggx_badges'))) {
+
+	$badge = get_entity($badge_guid);
+
+	$badge_style = '';
 
 	switch($size) {
 		case "small":
 		case "medium":
 		case "large":
-			$badge_url = elgg_add_action_tokens_to_url(elgg_get_site_url() . 'action/badges/view?' . 'file_guid=' . $vars['entity']->badges_badge);
+			$badge_url = elgg_get_inline_url($badge);
 			$badge_style = "width: 16px;
 				height: 16px;
 				display: block;
@@ -115,10 +119,6 @@ if ($vars['entity']->badges_badge && (int)elgg_get_plugin_setting('avatar_overla
 			break;
 		default:
 			break;
-	}
-
-	if ($guid = $vars['entity']->badges_badge) {
-		$badge = get_entity($guid);
 	}
 
 	if ($badge_style) {

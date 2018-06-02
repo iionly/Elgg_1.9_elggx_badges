@@ -1,44 +1,60 @@
 <?php
+/**
+ * Elggx Badges settings form
+ */
 
-$content = "<div>";
-$content .= elgg_echo('badges:lock_high');
-$content .= elgg_view('input/select', array(
+/* @var $plugin ElggPlugin */
+$plugin = elgg_extract('entity', $vars);
+
+if (elggx_badges_is_upgrade_available()) {
+	echo '<div class="elgg-admin-notices">';
+	echo '<p>';
+	echo elgg_view('output/url', [
+		'text' => elgg_echo('badges:upgrade'),
+		'href' => 'action/elggx_badges/upgrade',
+		'is_action' => true,
+	]);
+	echo '</p>';
+	echo '</div>';
+}
+
+// show navigation tabs
+echo elgg_view('elggx_badges/tabs', [
+	'tab' => 'settings',
+]);
+
+echo elgg_view_field([
+	'#type' => 'select',
+	'#label' => elgg_echo('badges:lock_high'),
+	'#help' => elgg_echo('badges:lock_high:info'),
 	'name' => 'params[lock_high]',
-	'options_values' => array(
-		'1' => elgg_echo('badges:settings:yes'),
-		'0' => elgg_echo('badges:settings:no')
-	),
-	'value' => $vars['entity']->lock_high
-));
-$content .= elgg_view("output/longtext", array("value" => elgg_echo('badges:lock_high:info'), 'class' => 'elgg-subtext mbm'));
-$content .= "</div>";
+	'options_values' => [
+		'1' => elgg_echo('option:yes'),
+		'0' => elgg_echo('option:no')
+	],
+	'value' => $plugin->lock_high,
+]);
 
-
-$content .= "<div>";
-$content .= elgg_echo('badges:show_description');
-$content .= elgg_view('input/select', array(
+echo elgg_view_field([
+	'#type' => 'select',
+	'#label' => elgg_echo('badges:show_description'),
+	'#help' => elgg_echo('badges:show_description:info'),
 	'name' => 'params[show_description]',
-	'options_values' => array(
-		'1' => elgg_echo('badges:settings:yes'),
-		'0' => elgg_echo('badges:settings:no')
-	),
-	'value' => $vars['entity']->show_description
-));
-$content .= elgg_view("output/longtext", array("value" => elgg_echo('badges:show_description:info'), 'class' => 'elgg-subtext mbm'));
-$content .= "</div>";
+	'options_values' => [
+		'1' => elgg_echo('option:yes'),
+		'0' => elgg_echo('option:no')
+	],
+	'value' => $plugin->show_description,
+]);
 
-
-$content .= "<div>";
-$content .= elgg_echo('badges:avatar_overlay');
-$content .= elgg_view('input/select', array(
+echo elgg_view_field([
+	'#type' => 'select',
+	'#label' => elgg_echo('badges:avatar_overlay'),
+	'#help' => elgg_echo('badges:avatar_overlay:info'),
 	'name' => 'params[avatar_overlay]',
-	'options_values' => array(
-		'1' => elgg_echo('badges:settings:yes'),
-		'0' => elgg_echo('badges:settings:no')
-	),
-	'value' => $vars['entity']->avatar_overlay
-));
-$content .= elgg_view("output/longtext", array("value" => elgg_echo('badges:avatar_overlay:info'), 'class' => 'elgg-subtext mbm'));
-$content .= "</div>";
-
-echo $content;
+	'options_values' => [
+		'1' => elgg_echo('option:yes'),
+		'0' => elgg_echo('option:no')
+	],
+	'value' => $plugin->avatar_overlay,
+]);

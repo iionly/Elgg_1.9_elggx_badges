@@ -4,4 +4,4 @@
  *
  */
 
-update_subtype('object', 'badge');
+update_subtype('object', BadgesBadge::SUBTYPE);

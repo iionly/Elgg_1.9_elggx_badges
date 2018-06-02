@@ -1,12 +1,15 @@
 <?php
 
-return array(
-	'admin:administer_utilities:elggx_badges' => 'Elggx Badges',
+return [
+	'admin:settings:elggx_badges' => 'Elggx Badges',
 	'badges:badges' => 'Badges',
+	'badges:settings' => 'Plugin Settings',
+	'badges:upgrade' => 'Upgrade',
+	'badges:upgrade:success' => 'Upgrade of Elggx Badges was successful.',
+	'badges:upgrade:not_required' => 'No upgrade required.',
 	'badges:save' => 'Save',
 	'badges:username' => 'Username',
-	'badges:lock' => 'Lock',
-	'badges:lock:info' => '(Lock the selected badge to the user preventing the badge from changing as points are awarded)',
+	'badges:lock:info' => 'Lock the selected badge to the user preventing the badge from changing as points are awarded',
 	'badges:lock_high' => 'Lock badge at highest achieved level? ',
 	'badges:lock_high:info' => '(Selecting this option prevents badges from decreasing as a user\'s points decrease. Higher level badges will still be awarded as the user gains points)',
 	'badges:badge:upper' => 'Badge: ',
@@ -24,15 +27,20 @@ return array(
 	'badges:admin' => 'Badges Administration',
 	'badges:noimage' => "No image was selected.",
 	'badges:uploaded' => 'The image was successfully uploaded.',
+	'badges:upload_failed' => 'Error: saving the badge image has failed.',
 	'badges:admin_settings' => 'Change Badges Settings',
 	'badges:river:awarded' => '%s was awarded with the %s badge for earning %s points.',
 	'badges:river:assigned' => '%s was awarded with the %s badge.',
 	'badges:edit' => 'Edit',
+	'badges:edit_fail_no_badge' => 'Error: entity to edit is not a badge entity.',
+	'badges:edit_fail_no_permissions' => 'Error: you have no permissions to edit this badge entity.',
 	'badges:points' => 'Points',
 	'badges:points:info' => '(In combination with the Elggx Userpoints plugin, badges can be auto awarded when a user reaches the specified number of points)',
 	'badges:list' => 'List of badges',
 	'badges:delete_success' => 'The badge was successfully deleted.',
-	'badges:delete_fail' => 'Failed to delete.',
+	'badges:delete_fail' => 'Failed to delete %s.',
+	'badges:delete_fail_no_badge' => 'Error: entity to delete is not a badge entity.',
+	'badges:delete_fail_no_permissions' => 'Error: you have no permissions to delete this badge entity.',
 	'badges:delete' => 'Delete',
 	'badges:delete:confirm' => 'Are you sure you want to delete this badge?',
 	'badges:upload' => 'Upload',
@@ -51,8 +59,6 @@ return array(
 	'badges:description:url:info' => '(You can specify a link where the badge will redirect your user. This is useful for explanation pages about the badge. The badge will only be clickable on the profile page and on the river)',
 	'badges:avatar_overlay' => 'Badge overlay of user\'s profile icon? ',
 	'badges:avatar_overlay:info' => '(Selecting this option will overlay the badge image over the profile icons of the users in the upper-left corner whereever the icons are shown on the site. This option requires the badges to be of size 16x16 pixels. Larger badge images will not show completely)',
-	'badges:settings:yes' => 'Yes',
-	'badges:settings:no' => 'No',
 	'river:assign:user:default' => 'A new Badge was assigned!',
-	'river:award:user:default' => 'A new Badge was awarded!'
-);
+	'river:award:user:default' => 'A new Badge was awarded!',
+];

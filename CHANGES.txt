@@ -1,6 +1,14 @@
 Changelog
 =========
 
+2.3.3
+-----
+
+- Minimum Elgg version required is now Elgg 2.3.0,
+- If Elggx Userpoints plugin is used, minimum version required is 2.3.2,
+- Major code rewrite to be inline with Elgg 2.3 coding style and functions,
+- Badge image location moved from uploading user's data directory subfolder to subfolder of site entity (see README.md for upgrate instructions).
+
 2.2.2
 -----
 

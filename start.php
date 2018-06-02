@@ -1,85 +1,37 @@
 <?php
 
-elgg_register_event_handler('init','system','badges_init');
+/**
+ * Main plugin file
+ */
 
-function badges_init() {
+require_once(dirname(__FILE__) . '/lib/functions.php');
+require_once(dirname(__FILE__) . '/lib/hooks.php');
 
-	elgg_extend_view('css/elgg', 'badges/css');
-	elgg_extend_view('icon/user/default','badges/icon');
+// register default Elgg event
+elgg_register_event_handler('init', 'system', 'elggx_badges_init');
 
-	elgg_register_plugin_hook_handler('userpoints:update', 'all', 'badges_userpoints');
+/**
+ * Called during system init
+ *
+ * @return void
+ */
+function elggx_badges_init() {
 
-	elgg_register_admin_menu_item('administer', 'elggx_badges', 'administer_utilities');
+	// Extend CSS/js
+	elgg_extend_view('elgg.css', 'elggx_badges/site.css');
 
-	// Extend avatar hover menu
-	elgg_register_plugin_hook_handler('register', 'menu:user_hover', 'badges_user_hover_menu');
+	// Extend view
+	elgg_extend_view('icon/user/default', 'elggx_badges/icon');
+
+	// Plugin hooks
+	elgg_register_plugin_hook_handler('userpoints:update', 'all', 'elggx_badges_userpoints');
+	elgg_register_plugin_hook_handler('register', 'menu:user_hover', 'elggx_badges_user_hover_menu');
 
 	// Register actions
-	$base_dir = elgg_get_plugins_path() . 'elggx_badges/actions';
-	elgg_register_action("badges/upload", "$base_dir/upload.php", 'admin');
-	elgg_register_action("badges/edit", "$base_dir/edit.php", 'admin');
-	elgg_register_action("badges/assign", "$base_dir/assign.php", 'admin');
-	elgg_register_action("badges/unassign", "$base_dir/unassign.php", 'admin');
-	elgg_register_action("badges/view", "$base_dir/view.php", 'public');
-	elgg_register_action("badges/delete", "$base_dir/delete.php", 'admin');
-}
-
-/**
- * Add to the user hover menu
- */
-function badges_user_hover_menu($hook, $type, $return, $params) {
-	$user = $params['entity'];
-
-	$url = "admin/administer_utilities/elggx_badges?tab=assign&user_guid={$user->guid}";
-	$item = new ElggMenuItem('badges', elgg_echo('badges:assign_badge'), $url);
-	$item->setSection('admin');
-	$return[] = $item;
-
-	$url = "admin/administer_utilities/elggx_badges?tab=unassign&user_guid={$user->guid}";
-	$item = new ElggMenuItem('badges', elgg_echo('badges:unassign_badge'), $url);
-	$item->setSection('admin');
-	$return[] = $item;
-
-	return $return;
-}
-
-/**
- * This method is called when a users points are updated.
- * We check to see what the users current balance is and
- * assign the appropriate badge.
- */
-function badges_userpoints($hook, $type, $return, $params) {
-
-	if ($params['entity']->badges_locked) {
-		return(true);
-	}
-
-	$points = $params['entity']->userpoints_points;
-	$badge = get_entity($params['entity']->badges_badge);
-
-	$options = array('type' => 'object', 'subtype' => 'badge', 'limit' => false, 'order_by_metadata' =>  array('name' => 'badges_userpoints', 'direction' => DESC, 'as' => integer));
-	$options['metadata_name_value_pairs'] = array(array('name' => 'badges_userpoints', 'value' => $points,  'operand' => '<='));
-	$entities = elgg_get_entities_from_metadata($options);
-
-	if ((int)elgg_get_plugin_setting('lock_high', 'elggx_badges')) {
-		if ($badge->badges_userpoints > $entities[0]->badges_userpoints) {
-			return(true);
-		}
-	}
-
-	if ($badge->guid != $entities[0]->guid) {
-		$params['entity']->badges_badge = $entities[0]->guid;
-		if (!elgg_trigger_plugin_hook('badges:update', 'object', array('entity' => $user), true)) {
-			$params['entity']->badges_badge = $badge->guid;
-			return(false);
-		}
-
-		// Announce it on the river
-		$user_guid = $params['entity']->getGUID();
-		elgg_delete_river(array("view" => 'river/object/badge/assign', "subject_guid" => $user_guid, "object_guid" => $user_guid));
-		elgg_delete_river(array("view" => 'river/object/badge/award', "subject_guid" => $user_guid, "object_guid" => $user_guid));
-		elgg_create_river_item(array('view' => 'river/object/badge/award', 'action_type' => 'award', 'subject_guid' => $user_guid, 'object_guid' => $user_guid));
-	}
-
-	return(true);
+	elgg_register_action('elggx_badges/upload', dirname(__FILE__) . '/actions/upload.php', 'admin');
+	elgg_register_action('elggx_badges/edit', dirname(__FILE__) . '/actions/edit.php', 'admin');
+	elgg_register_action('elggx_badges/assign', dirname(__FILE__) . '/actions/assign.php', 'admin');
+	elgg_register_action('elggx_badges/unassign', dirname(__FILE__) . '/actions/unassign.php', 'admin');
+	elgg_register_action('elggx_badges/delete', dirname(__FILE__) . '/actions/delete.php', 'admin');
+	elgg_register_action('elggx_badges/upgrade', dirname(__FILE__) . '/actions/upgrade.php', 'admin');
 }

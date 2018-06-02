@@ -6,21 +6,36 @@
 
 class BadgesBadge extends ElggFile {
 
+	/**
+	 * A single-word arbitrary string that defines what
+	 * kind of object this is
+	 *
+	 * @var string
+	 */
+	const SUBTYPE = 'badge';
+
+	/**
+	 * {@inheritDoc}
+	 * @see ElggObject::initializeAttributes()
+	 */
 	protected function initializeAttributes() {
 
 		parent::initializeAttributes();
 
-		$this->attributes['subtype'] = "badge";
+		$this->attributes['subtype'] = self::SUBTYPE;
 	}
 
-	public function __construct($guid = null) {
-		if ($guid && !is_object($guid)) {
-			// Loading entities via __construct(GUID) is deprecated, so we give it the entity row and the
-			// attribute loader will finish the job. This is necessary due to not using a custom
-			// subtype (see above).
-			$guid = get_entity_as_row($guid);
+	/**
+	 * {@inheritDoc}
+	 * @see ElggEntity::canDelete()
+	 */
+	public function canDelete($user_guid = 0) {
+
+		$user_guid = (int) $user_guid;
+		if (empty($user_guid)) {
+			$user_guid = elgg_get_logged_in_user_guid();
 		}
 
-		parent::__construct($guid);
+		return elgg_is_admin_user($user_guid);
 	}
 }

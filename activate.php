@@ -4,9 +4,9 @@
  *
  */
 
-// register class
-if (get_subtype_id('object', 'badge')) {
-	update_subtype('object', 'badge', 'BadgesBadge');
+// Register the BadgesBadge class for the object/userpoint subtype
+if (get_subtype_id('object', BadgesBadge::SUBTYPE)) {
+	update_subtype('object', BadgesBadge::SUBTYPE, 'BadgesBadge');
 } else {
-	add_subtype('object', 'badge', 'BadgesBadge');
+	add_subtype('object', BadgesBadge::SUBTYPE, 'BadgesBadge');
 }

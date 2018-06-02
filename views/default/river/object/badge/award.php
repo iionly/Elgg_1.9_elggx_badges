@@ -9,17 +9,17 @@ if ($guid = $object->badges_badge) {
 	$badge_url = $badge->badges_url;
 
 	if ($badge_url) {
-		$badge_view = "<a href=\"" . $badge_url . "\"><img title=\"" . $badge->title . "\" src=\"" . elgg_add_action_tokens_to_url(elgg_get_site_url() . "action/badges/view?file_guid=" . $badge->guid) . "\"></a>";
+		$badge_view = '<a href="' . $badge_url . '"><img title="' . $badge->title . '" src="' . elgg_get_inline_url($badge) . '"></a>';
 	} else {
-		$badge_view = "<img title=\"" . $badge->title . "\" src=\"" . elgg_add_action_tokens_to_url(elgg_get_site_url() . "action/badges/view?file_guid=" . $badge->guid) . "\">";
+		$badge_view = '<img title="' . $badge->title . '" src="' . elgg_get_inline_url($badge) . '">';
 	}
 
-	$url = "<a href=\"{$performed_by->getURL()}\">{$performed_by->name}</a>";
-	$string = elgg_echo("badges:river:awarded", array($url, $badge->title, $badge->badges_userpoints));
+	$url = '<a href="' . $performed_by->getURL() . '">' . $performed_by->name . '</a>';
+	$string = elgg_echo("badges:river:awarded", [$url, $badge->title, $badge->badges_userpoints]);
 
-	echo elgg_view('river/elements/layout', array(
+	echo elgg_view('river/elements/layout', [
 		'item' => $vars['item'],
 		'attachments' => $badge_view,
 		'message' => $string,
-	));
+	]);
 }

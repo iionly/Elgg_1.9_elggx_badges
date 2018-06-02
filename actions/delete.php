@@ -1,16 +1,21 @@
 <?php
 
-$guid = (int)get_input('guid');
+$guid = (int) get_input('guid');
 
-$file = get_entity($guid);
-$filename = $file->getFilenameOnFilestore();
+$badge = get_entity($guid);
 
-$results = $file->delete();
-
-if ($results != '') {
-	system_message(elgg_echo("badges:delete_success"));
-} else {
-	system_message(elgg_echo("badges:delete_fail") . ' ' . $filename);
+if (!$badge instanceof BadgesBadge) {
+	return elgg_error_response(elgg_echo('badges:delete_fail_no_badge'));
 }
 
-forward(REFERER);
+/* @var BadgesBadge $badge */
+
+if (!$badge->canEdit()) {
+	return elgg_error_response(elgg_echo('badges:delete_fail_no_permissions'));
+}
+
+if (!$badge->delete()) {
+	return elgg_error_response(elgg_echo('badges:delete_fail', [$badge->title]));
+}
+
+return elgg_ok_response('', elgg_echo('badges:delete_success'), REFERER);

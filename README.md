@@ -1,8 +1,8 @@
-Elggx Bagdes plugin for Elgg 2.2 and newer 2.X
+Elggx Bagdes plugin for Elgg 2.3 and newer 2.X
 ==============================================
 
-Latest Version: 2.2.2  
-Released: 2016-12-11  
+Latest Version: 2.3.3  
+Released: 2018-06-02  
 Contact: iionly@gmx.de  
 License: GNU General Public License version 2  
 Copyright: (c) iionly (for Elgg 1.8 and newer), Billy Gunn
@@ -24,4 +24,15 @@ Installation
 1. In case you have an earlier version of the Elggx Badges plugin installed it's best to remove the folder completely before copying the new version to the server,
 2. Copy the elggx_badges folder into the mod directory of your Elgg installation,
 3. Enable the plugin in the admin section of your site,
-4. Configure then the plugin settings (section "Configure" - "Settings" - "Elggx Badges"). At last upload some Badges and enter the Badges details (section "Administer" - "Utilities" - "Elggx Badges").
+4. Configure then the plugin settings and upload at least some Badges and enter the Badges details.
+
+
+Upgrading
+---------
+
+If you upload to version 2.3.3 or newer from a version older than 2.3.3 there's an upgrade script to execute that migrates badge images from the uploading user (or users) data directory subfolders to a single folder in the data directory subfolder of the site entity. To run it do as follows:
+
+1. Backup your site database and data directory (for safety to be able to restore the former state in case the upgrade fails to complete without errors),
+2. Run the upgrade from the Badges plugin settings page.
+
+If the badges show up correctly afterwards, the migration has been finished successfully.
