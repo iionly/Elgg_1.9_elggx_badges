@@ -56,7 +56,7 @@ function elggx_badges_userpoints($hook, $type, $return, $params) {
 		'limit' => false,
 		'order_by_metadata' =>  [
 			'name' => 'badges_userpoints',
-			'direction' => DESC,
+			'direction' => 'DESC',
 			'as' => 'integer',
 		],
 		'metadata_name_value_pairs' => [

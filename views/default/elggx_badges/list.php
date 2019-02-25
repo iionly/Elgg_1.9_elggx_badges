@@ -7,14 +7,14 @@ $sort = get_input('sort');
 if ($sort == 'points') {
 	$order = [
 		'name' => 'badges_userpoints',
-		'direction' => ASC,
+		'direction' => 'ASC',
 		'as' => 'integer',
 	];
 } else {
 	$sort = 'name';
 	$order = [
 		'name' => 'badges_name',
-		'direction' => ASC,
+		'direction' => 'ASC',
 	];
 }
 

@@ -8,7 +8,7 @@ $entities = elgg_get_entities_from_metadata([
 	'limit' => false,
 	'order_by_metadata' => [
 		'name' => 'badges_name',
-		'direction' => ASC,
+		'direction' => 'ASC',
 	],
 ]);
 
